@@ -43,13 +43,13 @@
 										"exec": [
 											"//Year is required for successful call. Ex: 1999",
 											"//Set the season(year) you want to search",
-											"pm.environment.set(\"year\", \"2022\");",
+											"pm.environment.set(\"year\", \"\");",
 											"",
 											"//Set the team you want to search",
-											"pm.environment.set(\"team\", \"USC\");",
+											"pm.environment.set(\"team\", \"\");",
 											"",
 											"//Set season type: regular or postseason",
-											"pm.environment.set(\"seasonType\", \"regular\");"
+											"pm.environment.set(\"seasonType\", \"\");"
 										],
 										"type": "text/javascript",
 										"packages": {}
@@ -124,15 +124,15 @@
 									"listen": "prerequest",
 									"script": {
 										"exec": [
-											"pm.environment.set(\"seasonType\", \"regular\");",
+											"pm.environment.set(\"seasonType\", \"\");",
 											"//Year is required for successful call. Ex: 1999",
 											"//Set the season(year) you want to search",
-											"pm.environment.set(\"year\", \"2019\");",
+											"pm.environment.set(\"year\", \"\");",
 											"//Set the team you want to search",
-											"pm.environment.set(\"team\", \"USC\");",
+											"pm.environment.set(\"team\", \"\");",
 											"//This makes the team you search default to the home team",
 											"setHomeTeam = () => {",
-											"    homeTeam = pm.environment.get(\"team\");",
+											"    homeTeam = pm.environment.get(\"\");",
 											"    pm.environment.set(\"home\", homeTeam);",
 											"};",
 											"setHomeTeam();"
@@ -206,15 +206,15 @@
 									"listen": "prerequest",
 									"script": {
 										"exec": [
-											"pm.environment.set(\"seasonType\", \"regular\");",
+											"pm.environment.set(\"seasonType\", \"\");",
 											"//Year is required for successful call. Ex: 1999",
 											"//Set the season(year) you want to search",
-											"pm.environment.set(\"year\", \"2019\");",
+											"pm.environment.set(\"year\", \"\");",
 											"//Set the team you want to search",
-											"pm.environment.set(\"team\", \"USC\");",
+											"pm.environment.set(\"team\", \"\");",
 											"//This makes the team you search default to the home team",
 											"setAwayTeam = () => {",
-											"    awayTeam = pm.environment.get(\"team\");",
+											"    awayTeam = pm.environment.get(\"\");",
 											"    pm.environment.set(\"away\", awayTeam);",
 											"};",
 											"setAwayTeam();"
@@ -271,12 +271,12 @@
 									"listen": "prerequest",
 									"script": {
 										"exec": [
-											"pm.environment.set(\"seasonType\", \"postseason\");",
+											"pm.environment.set(\"seasonType\", \"\");",
 											"//Year is required for successful call. Ex: 1999",
 											"//Set the season(year) you want to search",
-											"pm.environment.set(\"year\", \"2023\");",
+											"pm.environment.set(\"year\", \"\");",
 											"//Set the team you want to search",
-											"pm.environment.set(\"team\", \"USC\");"
+											"pm.environment.set(\"team\", \"\");"
 										],
 										"type": "text/javascript",
 										"packages": {}
@@ -429,9 +429,9 @@
 							"listen": "prerequest",
 							"script": {
 								"exec": [
-									"pm.environment.set(\"year\", \"2003\");",
+									"pm.environment.set(\"year\", \"\");",
 									"",
-									"pm.environment.set(\"seasonType\", \"regular\");",
+									"pm.environment.set(\"seasonType\", \"\");",
 									""
 								],
 								"type": "text/javascript",
@@ -516,9 +516,9 @@
 							"listen": "prerequest",
 							"script": {
 								"exec": [
-									"pm.environment.set(\"year\", \"2023\");",
-									"pm.environment.set(\"week\", \"2\");",
-									"pm.environment.set(\"team\", \"Nebraska\")"
+									"pm.environment.set(\"year\", \"\");",
+									"pm.environment.set(\"week\", \"\");",
+									"pm.environment.set(\"team\", \"\")"
 								],
 								"type": "text/javascript",
 								"packages": {}
@@ -1054,11 +1054,11 @@
 							"listen": "prerequest",
 							"script": {
 								"exec": [
-									"pm.environment.set(\"year\", 2016);",
+									"pm.environment.set(\"year\", \"\");",
 									"",
-									"pm.environment.set(\"week\", 5);",
+									"pm.environment.set(\"week\", \"\");",
 									"",
-									"pm.environment.set(\"team\", \"Nebraska\");",
+									"pm.environment.set(\"team\", \"\");",
 									"",
 									""
 								],
@@ -1410,8 +1410,8 @@
 							"listen": "prerequest",
 							"script": {
 								"exec": [
-									"pm.environment.set(\"year\", 2023);",
-									"pm.environment.set(\"team\", \"Nebraska\")"
+									"pm.environment.set(\"year\", \"\");",
+									"pm.environment.set(\"team\", \"\")"
 								],
 								"type": "text/javascript",
 								"packages": {}
@@ -1585,10 +1585,10 @@
 							"listen": "prerequest",
 							"script": {
 								"exec": [
-									"pm.environment.set(\"team1\", \"Nebraska\");",
-									"pm.environment.set(\"team2\", \"Tennessee\");",
-									"pm.environment.set(\"minYear\", 1995);",
-									"pm.environment.set(\"maxYear\", 1996);"
+									"pm.environment.set(\"team1\", \"\");",
+									"pm.environment.set(\"team2\", \"\");",
+									"pm.environment.set(\"minYear\",\"\");",
+									"pm.environment.set(\"maxYear\", \"\");"
 								],
 								"type": "text/javascript",
 								"packages": {}
@@ -1694,11 +1694,11 @@
 							"script": {
 								"exec": [
 									"//set player name",
-									"pm.environment.set(\"searchTerm\", \"Jordan Addison\");",
+									"pm.environment.set(\"searchTerm\", \"\");",
 									"",
-									"pm.environment.set(\"year\", \"2022\")",
+									"pm.environment.set(\"year\", \"\")",
 									"",
-									"pm.environment.set(\"team\", \"Nebraska\")",
+									"pm.environment.set(\"team\", \"\")",
 									"",
 									"pm.environment.set(\"position\", \"\")",
 									""
@@ -2083,7 +2083,7 @@
 								"exec": [
 									"//Set NCAA Division",
 									"//fbs, fcs, ii, iii",
-									"pm.environment.set(\"ncaaDivision\", \"iii\")"
+									"pm.environment.set(\"ncaaDivision\", \"\")"
 								],
 								"type": "text/javascript",
 								"packages": {}
@@ -2215,7 +2215,8 @@
 							"listen": "prerequest",
 							"script": {
 								"exec": [
-									"pm.environment.set(\"firstName\", \"\")"
+									"pm.environment.set(\"firstName\", \"\");",
+									"pm.environment.set(\"lastName\", \"\");"
 								],
 								"type": "text/javascript",
 								"packages": {}
@@ -2293,13 +2294,14 @@
 							"script": {
 								"exec": [
 									"//Set Year",
-									"pm.environment.set(\"year\", 2021);",
+									"pm.environment.set(\"year\", \"\");",
+									"",
 									"if (pm.environment.get(\"year\") >= 2024 || pm.environment.get(\"year\") <= 1935) {",
 									"    console.log(\"Error: Polling does not exist for this year,\")",
 									"}",
 									"",
 									"//Set Week (1-15)",
-									"pm.environment.set(\"week\", 1);",
+									"pm.environment.set(\"week\", \"\");",
 									"",
 									""
 								],
