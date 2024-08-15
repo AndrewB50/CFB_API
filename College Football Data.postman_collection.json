@@ -386,14 +386,14 @@
 							}
 						],
 						"url": {
-							"raw": "{{baseURL}}calendar?year=2023",
+							"raw": "{{baseURL}}calendar?year={{year}}",
 							"host": [
 								"{{baseURL}}calendar"
 							],
 							"query": [
 								{
 									"key": "year",
-									"value": "2023"
+									"value": "{{year}}"
 								}
 							]
 						},
@@ -480,12 +480,12 @@
 								},
 								{
 									"key": "mediaType",
-									"value": "",
+									"value": "{{mediaType}}",
 									"disabled": true
 								},
 								{
 									"key": "classification",
-									"value": "",
+									"value": "{{classification}}",
 									"disabled": true
 								}
 							]
@@ -570,12 +570,12 @@
 								},
 								{
 									"key": "category",
-									"value": "",
+									"value": "{{category}}",
 									"disabled": true
 								},
 								{
 									"key": "gameId",
-									"value": "",
+									"value": "{{gameId}}",
 									"disabled": true
 								}
 							]
@@ -660,12 +660,12 @@
 								},
 								{
 									"key": "gameId",
-									"value": "",
+									"value": "{{gameId}}",
 									"disabled": true
 								},
 								{
 									"key": "classification",
-									"value": "",
+									"value": "{{classification}}",
 									"disabled": true
 								}
 							]
@@ -779,6 +779,13 @@
 								"type": "text/javascript",
 								"packages": {}
 							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"packages": {},
+								"type": "text/javascript"
+							}
 						}
 					],
 					"request": {
@@ -794,30 +801,30 @@
 							}
 						],
 						"url": {
-							"raw": "{{baseURL}}drives?seasonType=regular&year=2010&week=1&team=Nebraska&offense=Nebraska",
+							"raw": "{{baseURL}}drives?seasonType={{seasonType}}&year={{minYear}}&week={{week}}&team={{team}}&offense={{team}}",
 							"host": [
 								"{{baseURL}}drives"
 							],
 							"query": [
 								{
 									"key": "seasonType",
-									"value": "regular"
+									"value": "{{seasonType}}"
 								},
 								{
 									"key": "year",
-									"value": "2010"
+									"value": "{{minYear}}"
 								},
 								{
 									"key": "week",
-									"value": "1"
+									"value": "{{week}}"
 								},
 								{
 									"key": "team",
-									"value": "Nebraska"
+									"value": "{{team}}"
 								},
 								{
 									"key": "offense",
-									"value": "Nebraska"
+									"value": "{{team}}"
 								}
 							]
 						}
@@ -941,8 +948,11 @@
 						{
 							"listen": "prerequest",
 							"script": {
-								"packages": {},
-								"type": "text/javascript"
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
 							}
 						}
 					],
@@ -959,30 +969,30 @@
 							}
 						],
 						"url": {
-							"raw": "{{baseURL}}plays?seasonType=regular&year=2018&week=2&team=Nebraska",
+							"raw": "{{baseURL}}plays?seasonType={{seasonType}}&year={{year}}&week={{week}}&team={{team}}",
 							"host": [
 								"{{baseURL}}plays"
 							],
 							"query": [
 								{
 									"key": "seasonType",
-									"value": "regular"
+									"value": "{{seasonType}}"
 								},
 								{
 									"key": "year",
-									"value": "2018"
+									"value": "{{year}}"
 								},
 								{
 									"key": "week",
-									"value": "2"
+									"value": "{{week}}"
 								},
 								{
 									"key": "team",
-									"value": "Nebraska"
+									"value": "{{team}}"
 								},
 								{
 									"key": "offense",
-									"value": "Nebraska",
+									"value": "{{team}}",
 									"disabled": true
 								},
 								{
@@ -1112,27 +1122,27 @@
 								},
 								{
 									"key": "conference",
-									"value": "",
+									"value": "{{conference}}",
 									"disabled": true
 								},
 								{
 									"key": "offenseConference",
-									"value": "",
+									"value": "{{offenseConference}}",
 									"disabled": true
 								},
 								{
 									"key": "defenseConference",
-									"value": "",
+									"value": "{{defenseConference}}",
 									"disabled": true
 								},
 								{
 									"key": "playType",
-									"value": "",
+									"value": "{{playType}}",
 									"disabled": true
 								},
 								{
 									"key": "classification",
-									"value": "",
+									"value": "{{classification}}",
 									"disabled": true
 								}
 							]
@@ -1154,6 +1164,16 @@
 									"pm.test(\"Response is an array\", function() {",
 									"    pm.expect(pm.response.json()).to.be.a('array');",
 									"})"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
 								],
 								"type": "text/javascript",
 								"packages": {}
@@ -1183,42 +1203,42 @@
 							"query": [
 								{
 									"key": "year",
-									"value": "2018",
+									"value": "{{year}}",
 									"disabled": true
 								},
 								{
 									"key": "week",
-									"value": "2",
+									"value": "{{week}}",
 									"disabled": true
 								},
 								{
 									"key": "team",
-									"value": "Nebraska",
+									"value": "{{team}}",
 									"disabled": true
 								},
 								{
 									"key": "gameID",
-									"value": "",
+									"value": "{{gameId}}",
 									"disabled": true
 								},
 								{
 									"key": "athleteID",
-									"value": "",
+									"value": "{{athleteId}}",
 									"disabled": true
 								},
 								{
 									"key": "statTypeId",
-									"value": null,
+									"value": "{{statTypeId}}",
 									"disabled": true
 								},
 								{
 									"key": "seasonType",
-									"value": null,
+									"value": "{{seasonType}}",
 									"disabled": true
 								},
 								{
 									"key": "conference",
-									"value": null,
+									"value": "{{conference}}",
 									"disabled": true
 								}
 							]
@@ -1293,7 +1313,7 @@
 							"query": [
 								{
 									"key": "conference",
-									"value": null,
+									"value": "{{conference}}",
 									"disabled": true
 								}
 							]
@@ -1359,18 +1379,6 @@
 							],
 							"path": [
 								"fbs"
-							],
-							"query": [
-								{
-									"key": "year",
-									"value": "2023",
-									"disabled": true
-								},
-								{
-									"key": "team",
-									"value": null,
-									"disabled": true
-								}
 							]
 						}
 					},
@@ -1542,6 +1550,16 @@
 								"type": "text/javascript",
 								"packages": {}
 							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
 						}
 					],
 					"request": {
@@ -1558,20 +1576,18 @@
 							}
 						],
 						"url": {
-							"raw": "{{baseURL}}talent",
+							"raw": "{{baseURL}}talent?team={{team}}&year={{year}}",
 							"host": [
 								"{{baseURL}}talent"
 							],
 							"query": [
 								{
 									"key": "team",
-									"value": "Nebraska",
-									"disabled": true
+									"value": "{{team}}"
 								},
 								{
 									"key": "year",
-									"value": "2023",
-									"disabled": true
+									"value": "{{year}}"
 								}
 							]
 						}
@@ -1791,17 +1807,17 @@
 							"query": [
 								{
 									"key": "position",
-									"value": null,
+									"value": "{{position}}",
 									"disabled": true
 								},
 								{
 									"key": "team",
-									"value": null,
+									"value": "{{position}}",
 									"disabled": true
 								},
 								{
 									"key": "year",
-									"value": null,
+									"value": "{{position}}",
 									"disabled": true
 								}
 							]
@@ -1848,17 +1864,17 @@
 							"query": [
 								{
 									"key": "year",
-									"value": "",
+									"value": "{{year}}",
 									"disabled": true
 								},
 								{
 									"key": "team",
-									"value": "",
+									"value": "{{team}}",
 									"disabled": true
 								},
 								{
 									"key": "conference",
-									"value": "",
+									"value": "{{conference}}",
 									"disabled": true
 								}
 							]
@@ -1876,6 +1892,16 @@
 									"pm.test(\"Status code is 200\", function () {",
 									"    pm.response.to.have.status(200);",
 									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
 								],
 								"type": "text/javascript",
 								"packages": {}
@@ -1906,37 +1932,37 @@
 							"query": [
 								{
 									"key": "year",
-									"value": "",
+									"value": "{{year}}",
 									"disabled": true
 								},
 								{
 									"key": "team",
-									"value": "",
+									"value": "{{team}}",
 									"disabled": true
 								},
 								{
 									"key": "conference",
-									"value": "",
+									"value": "{{conference}}",
 									"disabled": true
 								},
 								{
 									"key": "startWeek",
-									"value": null,
+									"value": "{{startWeek}}",
 									"disabled": true
 								},
 								{
 									"key": "endWeek",
-									"value": null,
+									"value": "{{endWeek}}",
 									"disabled": true
 								},
 								{
 									"key": "seasonType",
-									"value": "regular",
+									"value": "{{seasonType}}",
 									"disabled": true
 								},
 								{
 									"key": "category",
-									"value": null,
+									"value": "{{category}}",
 									"disabled": true
 								}
 							]
@@ -1954,6 +1980,16 @@
 									"pm.test(\"Status code is 200\", function () {",
 									"    pm.response.to.have.status(200);",
 									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
 								],
 								"type": "text/javascript",
 								"packages": {}
@@ -1983,37 +2019,37 @@
 							"query": [
 								{
 									"key": "year",
-									"value": "",
+									"value": "{{year}}",
 									"disabled": true
 								},
 								{
 									"key": "team",
-									"value": "",
+									"value": "{{team}}",
 									"disabled": true
 								},
 								{
 									"key": "conference",
-									"value": "",
+									"value": "{{conference}}",
 									"disabled": true
 								},
 								{
 									"key": "startWeek",
-									"value": null,
+									"value": "{{startWeek}}",
 									"disabled": true
 								},
 								{
 									"key": "endWeek",
-									"value": null,
+									"value": "{{endWeek}}",
 									"disabled": true
 								},
 								{
 									"key": "seasonType",
-									"value": "regular",
+									"value": "{{seasonType}}",
 									"disabled": true
 								},
 								{
 									"key": "category",
-									"value": null,
+									"value": "{{category}}",
 									"disabled": true
 								}
 							]
@@ -2236,19 +2272,20 @@
 							}
 						],
 						"url": {
-							"raw": "{{baseURL}}coaches?lastName=Rhule",
+							"raw": "{{baseURL}}coaches",
 							"host": [
 								"{{baseURL}}coaches"
 							],
 							"query": [
 								{
 									"key": "firstName",
-									"value": "Matthew",
+									"value": "{{firstName}}",
 									"disabled": true
 								},
 								{
 									"key": "lastName",
-									"value": "Rhule"
+									"value": "{{lastName}}",
+									"disabled": true
 								}
 							]
 						}
