@@ -1,0 +1,704 @@
+{
+	"info": {
+		"_postman_id": "a8b5bbb1-b24a-43cb-adc8-832032f5df33",
+		"name": "Program Info",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "32925208"
+	},
+	"item": [
+		{
+			"name": "Teams",
+			"item": [
+				{
+					"name": "All Teams",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Response is an array\", function() {",
+									"    pm.expect(pm.response.json()).to.be.a('array');",
+									"})",
+									"",
+									"/*",
+									"//Conaole log all team names",
+									"function logAllTeams(){",
+									"    for (i = 0; i < pm.response.json().length; i++){",
+									"        console.log(pm.response.json()[i].school);",
+									"    }",
+									"}",
+									"",
+									"logAllTeams()",
+									"*/"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "{{authToken}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseURL}}teams",
+							"host": [
+								"{{baseURL}}teams"
+							],
+							"query": [
+								{
+									"key": "conference",
+									"value": "{{conference}}",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "FBS Team List in Console",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Response is an array\", function() {",
+									"    pm.expect(pm.response.json()).to.be.a('array');",
+									"})",
+									"",
+									"//Console log school names only",
+									"let count = 0",
+									"for(schoolName = 0; schoolName < pm.response.json().length; schoolName++) {",
+									"    count++;",
+									"    console.log(pm.response.json()[schoolName].school);",
+									"}",
+									"console.log(count);"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "{{authToken}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseURL}}teams/fbs",
+							"host": [
+								"{{baseURL}}teams"
+							],
+							"path": [
+								"fbs"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Team W/L Records",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Response is an array\", function() {",
+									"    pm.expect(pm.response.json()).to.be.a('array');",
+									"})",
+									"",
+									"//Format W-L record",
+									"function getWinLoss() {",
+									"    const wins = pm.response.json()[0].total.wins;",
+									"    const losses = pm.response.json()[0].total.losses;",
+									"    const team = pm.response.json()[0].team;",
+									"    const year = pm.response.json()[0].year;",
+									"    const wlRecord = year + \" \" + team + \": \" + wins + \"-\" + losses;",
+									"    console.log(wlRecord);",
+									"};",
+									"getWinLoss();"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"pm.environment.set(\"year\", \"\");",
+									"pm.environment.set(\"team\", \"\")"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "{{authToken}}"
+							}
+						],
+						"url": {
+							"raw": "{{baseURL}}records?year={{year}}&team={{team}}",
+							"host": [
+								"{{baseURL}}records"
+							],
+							"query": [
+								{
+									"key": "year",
+									"value": "{{year}}"
+								},
+								{
+									"key": "team",
+									"value": "{{team}}"
+								},
+								{
+									"key": "conference",
+									"value": "{{conference}}",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Team Roster",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Response is an array\", function() {",
+									"    pm.expect(pm.response.json()).to.be.a('array');",
+									"})",
+									"",
+									"const rosterData = pm.response.json();",
+									"//Get full name, jersey number. ",
+									"for (i=0; i < rosterData.length; i++){",
+									"    console.log(\"Player: \" + rosterData[i].last_name + \", \" + rosterData[i].first_name + \" || Position: \" + rosterData[i].position + \" || Jersey: \" + rosterData[i].jersey)",
+									"};",
+									"",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "{{authToken}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseURL}}roster?team={{team}}&year={{year}}",
+							"host": [
+								"{{baseURL}}roster"
+							],
+							"query": [
+								{
+									"key": "team",
+									"value": "{{team}}"
+								},
+								{
+									"key": "year",
+									"value": "{{year}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Team Talent Composite Rankings",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Response is an array\", function() {",
+									"    pm.expect(pm.response.json()).to.be.a('array');",
+									"})"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "{{authToken}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseURL}}talent?team={{team}}&year={{year}}",
+							"host": [
+								"{{baseURL}}talent"
+							],
+							"query": [
+								{
+									"key": "team",
+									"value": "{{team}}"
+								},
+								{
+									"key": "year",
+									"value": "{{year}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Team Matchup History",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"pm.environment.set(\"team1\", \"\");",
+									"pm.environment.set(\"team2\", \"\");",
+									"pm.environment.set(\"minYear\",\"\");",
+									"pm.environment.set(\"maxYear\", \"\");"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"//Basic readable format in console",
+									"function wlRecord() {",
+									"    const response = pm.response.json();",
+									"    const team1 = response.team1;",
+									"    const team2 = response.team2;",
+									"    const wins = response.team1Wins;",
+									"    const losses = response.team2Wins;",
+									"    const wlAllTime = team1 + \" is \" + wins + \"-\" + losses + \" overall against \" + team2;",
+									"    console.log(wlAllTime)",
+									"}",
+									"",
+									"wlRecord();"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "{{authToken}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseURL}}teams/matchup?team1={{team1}}&team2={{team2}}",
+							"host": [
+								"{{baseURL}}teams"
+							],
+							"path": [
+								"matchup"
+							],
+							"query": [
+								{
+									"key": "team1",
+									"value": "{{team1}}"
+								},
+								{
+									"key": "team2",
+									"value": "{{team2}}"
+								},
+								{
+									"key": "minYear",
+									"value": "{{minYear}}",
+									"disabled": true
+								},
+								{
+									"key": "maxYear",
+									"value": "{{maxYear}}",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Conferences",
+			"item": [
+				{
+					"name": "All Conferences",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Response is an array\", function() {",
+									"    pm.expect(pm.response.json()).to.be.a('array');",
+									"})"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"packages": {},
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer AW4gvTa981zdjJ/FnaXNcqtpjqMb5RiqszakJ/kSPXx8pxn/39sAWd/kJn0EoX7T"
+							}
+						],
+						"url": {
+							"raw": "{{baseURL}}conferences",
+							"host": [
+								"{{baseURL}}conferences"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "All Conferences by League",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"//Set NCAA Division",
+									"//fbs, fcs, ii, iii",
+									"pm.environment.set(\"ncaaDivision\", \"\")"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Response is an array\", function() {",
+									"    pm.expect(pm.response.json()).to.be.a('array');",
+									"})",
+									"",
+									"//Get all conferences in FBS",
+									"//Select league (\"fbs\", \"fcs\", \"ii\", \"iii\")",
+									"const league = pm.response.json();",
+									"for (i=0;i<league.length;i++){",
+									"    if (league[i].classification == pm.environment.get(\"ncaaDivision\")){ //change league here for different results. Check console for results.",
+									"        console.log(pm.environment.get(\"ncaaDivision\") + \": \" + league[i].name)};",
+									"};"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer AW4gvTa981zdjJ/FnaXNcqtpjqMb5RiqszakJ/kSPXx8pxn/39sAWd/kJn0EoX7T"
+							}
+						],
+						"url": {
+							"raw": "{{baseURL}}conferences?ncaaDivision={{ncaaDivision}}",
+							"host": [
+								"{{baseURL}}conferences"
+							],
+							"query": [
+								{
+									"key": "ncaaDivision",
+									"value": "{{ncaaDivision}}"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Venues",
+			"item": [
+				{
+					"name": "Arena and Venue Information",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Response is an array\", function() {",
+									"    pm.expect(pm.response.json()).to.be.a('array');",
+									"})"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer AW4gvTa981zdjJ/FnaXNcqtpjqMb5RiqszakJ/kSPXx8pxn/39sAWd/kJn0EoX7T"
+							}
+						],
+						"url": {
+							"raw": "{{baseURL}}venues",
+							"host": [
+								"{{baseURL}}venues"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Rankings",
+			"item": [
+				{
+					"name": "Top 25",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Response is an array\", function() {",
+									"    pm.expect(pm.response.json()).to.be.a('array');",
+									"})",
+									"",
+									"//Test if a valid year was passed. Polling years: 1936-Present",
+									"pm.test(\"Valid year for polling\", function() {",
+									"    pm.expect(pm.response.json()[0].season).to.be.above(1935) && pm.expect(pm.response.json()[0].season).to.be.below(2024);",
+									"});",
+									"",
+									"pm.test(\"Valid week for polling\", function() {",
+									"    pm.expect(pm.response.json()[0].week).to.be.above(0) && pm.expect(pm.response.json()[0].week).to.be.below(16);",
+									"})",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"//Set Year",
+									"pm.environment.set(\"year\", \"\");",
+									"",
+									"if (pm.environment.get(\"year\") >= 2024 || pm.environment.get(\"year\") <= 1935) {",
+									"    console.log(\"Error: Polling does not exist for this year,\")",
+									"}",
+									"",
+									"//Set Week (1-15)",
+									"pm.environment.set(\"week\", \"\");",
+									"",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer AW4gvTa981zdjJ/FnaXNcqtpjqMb5RiqszakJ/kSPXx8pxn/39sAWd/kJn0EoX7T"
+							}
+						],
+						"url": {
+							"raw": "{{baseURL}}rankings?year={{year}}&week={{week}}",
+							"host": [
+								"{{baseURL}}rankings"
+							],
+							"query": [
+								{
+									"key": "year",
+									"value": "{{year}}"
+								},
+								{
+									"key": "week",
+									"value": "{{week}}"
+								},
+								{
+									"key": "seasonType",
+									"value": "{{seasonType}}",
+									"disabled": true
+								}
+							]
+						},
+						"description": "This request produces the top 25 ranked teams for different polls. Set parameters for a given year and week within that year for either the regular season or post-season."
+					},
+					"response": []
+				}
+			],
+			"description": "This folder hosts API calls that display team rankings for given years."
+		}
+	]
+}

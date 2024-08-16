@@ -1,0 +1,455 @@
+{
+	"info": {
+		"_postman_id": "c1341403-e536-41f3-8f60-e4fd34a23f01",
+		"name": "Coaches and Players",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "32925208"
+	},
+	"item": [
+		{
+			"name": "Coaches",
+			"item": [
+				{
+					"name": "Coaching Records and History",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Response is an array\", function() {",
+									"    pm.expect(pm.response.json()).to.be.a('array');",
+									"})"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"pm.environment.set(\"firstName\", \"\");",
+									"pm.environment.set(\"lastName\", \"\");"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer AW4gvTa981zdjJ/FnaXNcqtpjqMb5RiqszakJ/kSPXx8pxn/39sAWd/kJn0EoX7T"
+							}
+						],
+						"url": {
+							"raw": "{{baseURL}}coaches",
+							"host": [
+								"{{baseURL}}coaches"
+							],
+							"query": [
+								{
+									"key": "firstName",
+									"value": "{{firstName}}",
+									"disabled": true
+								},
+								{
+									"key": "lastName",
+									"value": "{{lastName}}",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Players",
+			"item": [
+				{
+					"name": "Player Search",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Player on roster for given year\", function () {",
+									"    pm.expect(pm.response.json()[0]).exist;",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"//set player name",
+									"pm.environment.set(\"searchTerm\", \"\");",
+									"",
+									"pm.environment.set(\"year\", \"\")",
+									"",
+									"pm.environment.set(\"team\", \"\")",
+									"",
+									"pm.environment.set(\"position\", \"\")",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer AW4gvTa981zdjJ/FnaXNcqtpjqMb5RiqszakJ/kSPXx8pxn/39sAWd/kJn0EoX7T"
+							}
+						],
+						"url": {
+							"raw": "{{baseURL}}player/search?searchTerm={{searchTerm}}&year={{year}}",
+							"host": [
+								"{{baseURL}}player"
+							],
+							"path": [
+								"search"
+							],
+							"query": [
+								{
+									"key": "searchTerm",
+									"value": "{{searchTerm}}"
+								},
+								{
+									"key": "position",
+									"value": "{{position}}",
+									"disabled": true
+								},
+								{
+									"key": "team",
+									"value": "{{team}}",
+									"disabled": true
+								},
+								{
+									"key": "year",
+									"value": "{{year}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Player Usage Metrics by Season",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer AW4gvTa981zdjJ/FnaXNcqtpjqMb5RiqszakJ/kSPXx8pxn/39sAWd/kJn0EoX7T"
+							}
+						],
+						"url": {
+							"raw": "{{baseURL}}player/usage",
+							"host": [
+								"{{baseURL}}player"
+							],
+							"path": [
+								"usage"
+							],
+							"query": [
+								{
+									"key": "position",
+									"value": "{{position}}",
+									"disabled": true
+								},
+								{
+									"key": "team",
+									"value": "{{position}}",
+									"disabled": true
+								},
+								{
+									"key": "year",
+									"value": "{{position}}",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Team Returning Production Metrics",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer AW4gvTa981zdjJ/FnaXNcqtpjqMb5RiqszakJ/kSPXx8pxn/39sAWd/kJn0EoX7T"
+							}
+						],
+						"url": {
+							"raw": "{{baseURL}}player/returning",
+							"host": [
+								"{{baseURL}}player"
+							],
+							"path": [
+								"returning"
+							],
+							"query": [
+								{
+									"key": "year",
+									"value": "{{year}}",
+									"disabled": true
+								},
+								{
+									"key": "team",
+									"value": "{{team}}",
+									"disabled": true
+								},
+								{
+									"key": "conference",
+									"value": "{{conference}}",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Player Stats by Season",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer AW4gvTa981zdjJ/FnaXNcqtpjqMb5RiqszakJ/kSPXx8pxn/39sAWd/kJn0EoX7T"
+							}
+						],
+						"url": {
+							"raw": "{{baseURL}}stats/player/season",
+							"host": [
+								"{{baseURL}}stats"
+							],
+							"path": [
+								"player",
+								"season"
+							],
+							"query": [
+								{
+									"key": "year",
+									"value": "{{year}}",
+									"disabled": true
+								},
+								{
+									"key": "team",
+									"value": "{{team}}",
+									"disabled": true
+								},
+								{
+									"key": "conference",
+									"value": "{{conference}}",
+									"disabled": true
+								},
+								{
+									"key": "startWeek",
+									"value": "{{startWeek}}",
+									"disabled": true
+								},
+								{
+									"key": "endWeek",
+									"value": "{{endWeek}}",
+									"disabled": true
+								},
+								{
+									"key": "seasonType",
+									"value": "{{seasonType}}",
+									"disabled": true
+								},
+								{
+									"key": "category",
+									"value": "{{category}}",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Transfer Portal by Season",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer AW4gvTa981zdjJ/FnaXNcqtpjqMb5RiqszakJ/kSPXx8pxn/39sAWd/kJn0EoX7T"
+							}
+						],
+						"url": {
+							"raw": "{{baseURL}}player/portal",
+							"host": [
+								"{{baseURL}}player"
+							],
+							"path": [
+								"portal"
+							],
+							"query": [
+								{
+									"key": "year",
+									"value": "{{year}}",
+									"disabled": true
+								},
+								{
+									"key": "team",
+									"value": "{{team}}",
+									"disabled": true
+								},
+								{
+									"key": "conference",
+									"value": "{{conference}}",
+									"disabled": true
+								},
+								{
+									"key": "startWeek",
+									"value": "{{startWeek}}",
+									"disabled": true
+								},
+								{
+									"key": "endWeek",
+									"value": "{{endWeek}}",
+									"disabled": true
+								},
+								{
+									"key": "seasonType",
+									"value": "{{seasonType}}",
+									"disabled": true
+								},
+								{
+									"key": "category",
+									"value": "{{category}}",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

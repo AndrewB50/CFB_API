@@ -1,0 +1,761 @@
+{
+	"info": {
+		"_postman_id": "7a21c128-8e13-4fb6-b4e5-15c86b57a297",
+		"name": "Season Info and Games",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "32925208"
+	},
+	"item": [
+		{
+			"name": "Games",
+			"item": [
+				{
+					"name": "Games and Results",
+					"item": [
+						{
+							"name": "Game Results",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});",
+											"",
+											"pm.test(\"Seaon Data Available\", function () {",
+											"    const seasonYear = pm.response.json()[0].season;",
+											"    pm.expect(seasonYear).to.exist;",
+											"});",
+											"",
+											"pm.test(\"Response is an array\", function() {",
+											"    pm.expect(pm.response.json()).to.be.a('array');",
+											"})"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"//Year is required for successful call. Ex: 1999",
+											"//Set the season(year) you want to search",
+											"pm.environment.set(\"year\", \"\");",
+											"",
+											"//Set the team you want to search",
+											"pm.environment.set(\"team\", \"\");",
+											"",
+											"//Set season type: regular or postseason",
+											"pm.environment.set(\"seasonType\", \"\");"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "accept",
+										"value": "application/json"
+									},
+									{
+										"key": "Authorization",
+										"value": "{{authToken}}"
+									}
+								],
+								"url": {
+									"raw": "{{baseURL}}games?year={{year}}&week={{week}}&seasonType={{seasonType}}&team={{team}}",
+									"host": [
+										"{{baseURL}}games"
+									],
+									"query": [
+										{
+											"key": "year",
+											"value": "{{year}}"
+										},
+										{
+											"key": "week",
+											"value": "{{week}}"
+										},
+										{
+											"key": "seasonType",
+											"value": "{{seasonType}}"
+										},
+										{
+											"key": "team",
+											"value": "{{team}}"
+										}
+									]
+								},
+								"description": "Get game results by specifying year, and team. Further specification includes which week of the given season and season type."
+							},
+							"response": []
+						},
+						{
+							"name": "Home Games by Season/Team",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});",
+											"",
+											"pm.test(\"Seaon Data Available\", function () {",
+											"    const seasonYear = pm.response.json()[0].season;",
+											"    pm.expect(seasonYear).to.exist;",
+											"});",
+											"",
+											"pm.test(\"Response is an array\", function() {",
+											"    pm.expect(pm.response.json()).to.be.a('array');",
+											"})"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"pm.environment.set(\"seasonType\", \"\");",
+											"//Year is required for successful call. Ex: 1999",
+											"//Set the season(year) you want to search",
+											"pm.environment.set(\"year\", \"\");",
+											"//Set the team you want to search",
+											"pm.environment.set(\"team\", \"\");",
+											"//This makes the team you search default to the home team",
+											"setHomeTeam = () => {",
+											"    homeTeam = pm.environment.get(\"\");",
+											"    pm.environment.set(\"home\", homeTeam);",
+											"};",
+											"setHomeTeam();"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "accept",
+										"value": "application/json"
+									},
+									{
+										"key": "Authorization",
+										"value": "{{authToken}}"
+									}
+								],
+								"url": {
+									"raw": "{{baseURL}}games?year={{year}}&team={{team}}&home={{home}}",
+									"host": [
+										"{{baseURL}}games"
+									],
+									"query": [
+										{
+											"key": "year",
+											"value": "{{year}}"
+										},
+										{
+											"key": "team",
+											"value": "{{team}}"
+										},
+										{
+											"key": "home",
+											"value": "{{home}}"
+										}
+									]
+								},
+								"description": "Find all home game results of a team by year."
+							},
+							"response": []
+						},
+						{
+							"name": "Away Games by Season/Team",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});",
+											"",
+											"pm.test(\"Seaon Data Available\", function () {",
+											"    const seasonYear = pm.response.json()[0].season;",
+											"    pm.expect(seasonYear).to.exist;",
+											"});",
+											"",
+											"pm.test(\"Response is an array\", function() {",
+											"    pm.expect(pm.response.json()).to.be.a('array');",
+											"})"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"pm.environment.set(\"seasonType\", \"\");",
+											"//Year is required for successful call. Ex: 1999",
+											"//Set the season(year) you want to search",
+											"pm.environment.set(\"year\", \"\");",
+											"//Set the team you want to search",
+											"pm.environment.set(\"team\", \"\");",
+											"//This makes the team you search default to the home team",
+											"setAwayTeam = () => {",
+											"    awayTeam = pm.environment.get(\"\");",
+											"    pm.environment.set(\"away\", awayTeam);",
+											"};",
+											"setAwayTeam();"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "accept",
+										"value": "application/json"
+									},
+									{
+										"key": "Authorization",
+										"value": "{{authToken}}"
+									}
+								],
+								"url": {
+									"raw": "{{baseURL}}games?year={{year}}&seasonType={{seasonType}}&team={{team}}&away={{away}}",
+									"host": [
+										"{{baseURL}}games"
+									],
+									"query": [
+										{
+											"key": "year",
+											"value": "{{year}}"
+										},
+										{
+											"key": "seasonType",
+											"value": "{{seasonType}}"
+										},
+										{
+											"key": "team",
+											"value": "{{team}}"
+										},
+										{
+											"key": "away",
+											"value": "{{away}}"
+										}
+									]
+								},
+								"description": "Find all away game results of a team by year."
+							},
+							"response": []
+						},
+						{
+							"name": "Post-Season Game(s)",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"pm.environment.set(\"seasonType\", \"\");",
+											"//Year is required for successful call. Ex: 1999",
+											"//Set the season(year) you want to search",
+											"pm.environment.set(\"year\", \"\");",
+											"//Set the team you want to search",
+											"pm.environment.set(\"team\", \"\");"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});",
+											"",
+											"pm.test(\"Post-seaon Data Available for this Team\", function () {",
+											"    const seasonYear = pm.response.json()[0].season;",
+											"    pm.expect(seasonYear).to.exist;",
+											"});",
+											"",
+											"pm.test(\"Response is an array\", function() {",
+											"    pm.expect(pm.response.json()).to.be.a('array');",
+											"})"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "accept",
+										"value": "application/json"
+									},
+									{
+										"key": "Authorization",
+										"value": "{{authToken}}"
+									}
+								],
+								"url": {
+									"raw": "{{baseURL}}games?year={{year}}&seasonType=postseason&team={{team}}",
+									"host": [
+										"{{baseURL}}games"
+									],
+									"query": [
+										{
+											"key": "year",
+											"value": "{{year}}"
+										},
+										{
+											"key": "seasonType",
+											"value": "postseason"
+										},
+										{
+											"key": "team",
+											"value": "{{team}}"
+										}
+									]
+								},
+								"description": "Find the post-season results of a team from a given season."
+							},
+							"response": []
+						}
+					],
+					"description": "Search for full game results. Can search using the following information:\n\n- Team name\n    \n    - Can specify Home and Away\n        \n- Year\n    \n- Week\n    \n- Season type\n    \n    - Regular or Post-season"
+				},
+				{
+					"name": "Season Calendar",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Response is an array\", function() {",
+									"    pm.expect(pm.response.json()).to.be.a('array');",
+									"})"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "{{authToken}}"
+							}
+						],
+						"url": {
+							"raw": "{{baseURL}}calendar?year={{year}}",
+							"host": [
+								"{{baseURL}}calendar"
+							],
+							"query": [
+								{
+									"key": "year",
+									"value": "{{year}}"
+								}
+							]
+						},
+						"description": "Find all weeks for college football of a given year."
+					},
+					"response": []
+				},
+				{
+					"name": "Media Information and Schedules",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Valid year is specified\", function() {",
+									"    pm.expect(pm.response.json()[0].season).to.be.below(2024)",
+									"    pm.expect(pm.response.json()[0].season).to.be.above(2002);",
+									"});",
+									"",
+									"pm.test(\"Response is an array\", function() {",
+									"    pm.expect(pm.response.json()).to.be.a('array');",
+									"})"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"pm.environment.set(\"year\", \"\");",
+									"",
+									"pm.environment.set(\"seasonType\", \"\");",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer AW4gvTa981zdjJ/FnaXNcqtpjqMb5RiqszakJ/kSPXx8pxn/39sAWd/kJn0EoX7T"
+							}
+						],
+						"url": {
+							"raw": "{{baseURL}}games/media?year={{year}}&seasonType={{seasonType}}",
+							"host": [
+								"{{baseURL}}games"
+							],
+							"path": [
+								"media"
+							],
+							"query": [
+								{
+									"key": "year",
+									"value": "{{year}}"
+								},
+								{
+									"key": "seasonType",
+									"value": "{{seasonType}}"
+								},
+								{
+									"key": "week",
+									"value": "{{week}}",
+									"disabled": true
+								},
+								{
+									"key": "team",
+									"value": "{{team}}",
+									"disabled": true
+								},
+								{
+									"key": "mediaType",
+									"value": "{{mediaType}}",
+									"disabled": true
+								},
+								{
+									"key": "classification",
+									"value": "{{classification}}",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Player Game Stats",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Response is an array\", function() {",
+									"    pm.expect(pm.response.json()).to.be.a('array');",
+									"})"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"pm.environment.set(\"year\", \"\");",
+									"pm.environment.set(\"week\", \"\");",
+									"pm.environment.set(\"team\", \"\")"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer AW4gvTa981zdjJ/FnaXNcqtpjqMb5RiqszakJ/kSPXx8pxn/39sAWd/kJn0EoX7T"
+							}
+						],
+						"url": {
+							"raw": "{{baseURL}}games/players?year={{year}}&week={{week}}&team={{team}}",
+							"host": [
+								"{{baseURL}}games"
+							],
+							"path": [
+								"players"
+							],
+							"query": [
+								{
+									"key": "year",
+									"value": "{{year}}"
+								},
+								{
+									"key": "week",
+									"value": "{{week}}"
+								},
+								{
+									"key": "seasonType",
+									"value": "{{seasonType}}",
+									"disabled": true
+								},
+								{
+									"key": "team",
+									"value": "{{team}}"
+								},
+								{
+									"key": "conference",
+									"value": "{{conference}}",
+									"disabled": true
+								},
+								{
+									"key": "category",
+									"value": "{{category}}",
+									"disabled": true
+								},
+								{
+									"key": "gameId",
+									"value": "{{gameId}}",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Team Game Stats",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Response is an array\", function() {",
+									"    pm.expect(pm.response.json()).to.be.a('array');",
+									"})"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer AW4gvTa981zdjJ/FnaXNcqtpjqMb5RiqszakJ/kSPXx8pxn/39sAWd/kJn0EoX7T"
+							}
+						],
+						"url": {
+							"raw": "{{baseURL}}games/teams?year={{year}}",
+							"host": [
+								"{{baseURL}}games"
+							],
+							"path": [
+								"teams"
+							],
+							"query": [
+								{
+									"key": "year",
+									"value": "{{year}}"
+								},
+								{
+									"key": "week",
+									"value": "{{week}}",
+									"disabled": true
+								},
+								{
+									"key": "seasonType",
+									"value": "{{seasonType}}",
+									"disabled": true
+								},
+								{
+									"key": "team",
+									"value": "{{team}}",
+									"disabled": true
+								},
+								{
+									"key": "conference",
+									"value": "{{conference}}",
+									"disabled": true
+								},
+								{
+									"key": "gameId",
+									"value": "{{gameId}}",
+									"disabled": true
+								},
+								{
+									"key": "classification",
+									"value": "{{classification}}",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Advanced Box Scores",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Response is an array\", function() {",
+									"    pm.expect(pm.response.json()).to.be.a('array');",
+									"})"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"//set year",
+									"pm.environment.set(\"year\", \"\")",
+									"",
+									"//set week",
+									"pm.environment.set(\"week\", \"\")",
+									"",
+									"//set season type",
+									"pm.environment.set(\"seasonType\", \"\")",
+									"",
+									"//set team",
+									"pm.environment.set(\"team\", \"\")"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer AW4gvTa981zdjJ/FnaXNcqtpjqMb5RiqszakJ/kSPXx8pxn/39sAWd/kJn0EoX7T"
+							}
+						],
+						"url": {
+							"raw": "{{baseURL}}games/teams?year={{year}}&week={{week}}&seasonType={{seasonType}}&team={{team}}",
+							"host": [
+								"{{baseURL}}games"
+							],
+							"path": [
+								"teams"
+							],
+							"query": [
+								{
+									"key": "year",
+									"value": "{{year}}"
+								},
+								{
+									"key": "week",
+									"value": "{{week}}"
+								},
+								{
+									"key": "seasonType",
+									"value": "{{seasonType}}"
+								},
+								{
+									"key": "team",
+									"value": "{{team}}"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"description": "This folder contains a list of similar API calls. Searching by season, the user can look at:\n\n- Game results\n    \n    - Regular-season, post-season, home games, and away games\n        \n- Season calendar for each season\n    \n- Media information for each game\n    \n- Team and Player stats for individual games\n    \n- Advanced box scores"
+		}
+	]
+}

@@ -1,0 +1,503 @@
+{
+	"info": {
+		"_postman_id": "a200a893-6976-4198-8494-2ba4f8a6f3cd",
+		"name": "Plays and Drives",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "32925208"
+	},
+	"item": [
+		{
+			"name": "Plays",
+			"item": [
+				{
+					"name": "Play Types",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Response is an array\", function() {",
+									"    pm.expect(pm.response.json()).to.be.a('array');",
+									"})"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer AW4gvTa981zdjJ/FnaXNcqtpjqMb5RiqszakJ/kSPXx8pxn/39sAWd/kJn0EoX7T"
+							}
+						],
+						"url": {
+							"raw": "{{baseURL}}play/types",
+							"host": [
+								"{{baseURL}}play"
+							],
+							"path": [
+								"types"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Types of Play Stats",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Response is an array\", function() {",
+									"    pm.expect(pm.response.json()).to.be.a('array');",
+									"})"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer AW4gvTa981zdjJ/FnaXNcqtpjqMb5RiqszakJ/kSPXx8pxn/39sAWd/kJn0EoX7T"
+							}
+						],
+						"url": {
+							"raw": "{{baseURL}}play/stat/types",
+							"host": [
+								"{{baseURL}}play"
+							],
+							"path": [
+								"stat",
+								"types"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Play by Play Data",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Response is an array\", function() {",
+									"    pm.expect(pm.response.json()).to.be.a('array');",
+									"})",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer AW4gvTa981zdjJ/FnaXNcqtpjqMb5RiqszakJ/kSPXx8pxn/39sAWd/kJn0EoX7T"
+							}
+						],
+						"url": {
+							"raw": "{{baseURL}}plays?seasonType={{seasonType}}&year={{year}}&week={{week}}&team={{team}}",
+							"host": [
+								"{{baseURL}}plays"
+							],
+							"query": [
+								{
+									"key": "seasonType",
+									"value": "{{seasonType}}"
+								},
+								{
+									"key": "year",
+									"value": "{{year}}"
+								},
+								{
+									"key": "week",
+									"value": "{{week}}"
+								},
+								{
+									"key": "team",
+									"value": "{{team}}"
+								},
+								{
+									"key": "offense",
+									"value": "{{team}}",
+									"disabled": true
+								},
+								{
+									"key": "defense",
+									"value": "{{team}}",
+									"disabled": true
+								},
+								{
+									"key": "conference",
+									"value": "{{conference}}",
+									"disabled": true
+								},
+								{
+									"key": "offenseConference",
+									"value": "{{offenseConference}}",
+									"disabled": true
+								},
+								{
+									"key": "defenseConference",
+									"value": "{{defenseConference}}",
+									"disabled": true
+								},
+								{
+									"key": "playType",
+									"value": "{{playType}}",
+									"disabled": true
+								},
+								{
+									"key": "classification",
+									"value": "{{classification}}",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "First Down Plays in Console",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Response is an array\", function() {",
+									"    pm.expect(pm.response.json()).to.be.a('array');",
+									"})",
+									"",
+									"play = pm.response.json()",
+									"count = 0;",
+									"//First Downs",
+									"for(i = 0; i < play.length; i++) {",
+									"    if (play[i].play_text.includes(\"1ST down\")) {",
+									"        console.log(pm.response.json()[i].play_text);",
+									"        count++;",
+									"    }",
+									"}",
+									"console.log(count + \" First Downs\")"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"pm.environment.set(\"year\", \"\");",
+									"",
+									"pm.environment.set(\"week\", \"\");",
+									"",
+									"pm.environment.set(\"team\", \"\");",
+									"",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer AW4gvTa981zdjJ/FnaXNcqtpjqMb5RiqszakJ/kSPXx8pxn/39sAWd/kJn0EoX7T"
+							}
+						],
+						"url": {
+							"raw": "{{baseURL}}plays?seasonType={{seasonType}}&year={{year}}&week={{week}}&team={{team}}&offense={{team}}",
+							"host": [
+								"{{baseURL}}plays"
+							],
+							"query": [
+								{
+									"key": "seasonType",
+									"value": "{{seasonType}}"
+								},
+								{
+									"key": "year",
+									"value": "{{year}}"
+								},
+								{
+									"key": "week",
+									"value": "{{week}}"
+								},
+								{
+									"key": "team",
+									"value": "{{team}}"
+								},
+								{
+									"key": "offense",
+									"value": "{{team}}"
+								},
+								{
+									"key": "defense",
+									"value": "{{team}}",
+									"disabled": true
+								},
+								{
+									"key": "conference",
+									"value": "{{conference}}",
+									"disabled": true
+								},
+								{
+									"key": "offenseConference",
+									"value": "{{offenseConference}}",
+									"disabled": true
+								},
+								{
+									"key": "defenseConference",
+									"value": "{{defenseConference}}",
+									"disabled": true
+								},
+								{
+									"key": "playType",
+									"value": "{{playType}}",
+									"disabled": true
+								},
+								{
+									"key": "classification",
+									"value": "{{classification}}",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Play Stats by Play",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Response is an array\", function() {",
+									"    pm.expect(pm.response.json()).to.be.a('array');",
+									"})"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer AW4gvTa981zdjJ/FnaXNcqtpjqMb5RiqszakJ/kSPXx8pxn/39sAWd/kJn0EoX7T"
+							}
+						],
+						"url": {
+							"raw": "{{baseURL}}plays/stats",
+							"host": [
+								"{{baseURL}}plays"
+							],
+							"path": [
+								"stats"
+							],
+							"query": [
+								{
+									"key": "year",
+									"value": "{{year}}",
+									"disabled": true
+								},
+								{
+									"key": "week",
+									"value": "{{week}}",
+									"disabled": true
+								},
+								{
+									"key": "team",
+									"value": "{{team}}",
+									"disabled": true
+								},
+								{
+									"key": "gameID",
+									"value": "{{gameId}}",
+									"disabled": true
+								},
+								{
+									"key": "athleteID",
+									"value": "{{athleteId}}",
+									"disabled": true
+								},
+								{
+									"key": "statTypeId",
+									"value": "{{statTypeId}}",
+									"disabled": true
+								},
+								{
+									"key": "seasonType",
+									"value": "{{seasonType}}",
+									"disabled": true
+								},
+								{
+									"key": "conference",
+									"value": "{{conference}}",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Drives",
+			"item": [
+				{
+					"name": "Drive Data and Results",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Response is an array\", function() {",
+									"    pm.expect(pm.response.json()).to.be.a('array');",
+									"})"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer AW4gvTa981zdjJ/FnaXNcqtpjqMb5RiqszakJ/kSPXx8pxn/39sAWd/kJn0EoX7T"
+							}
+						],
+						"url": {
+							"raw": "{{baseURL}}drives?seasonType={{seasonType}}&year={{year}}&week={{week}}&team={{team}}&offense={{team}}",
+							"host": [
+								"{{baseURL}}drives"
+							],
+							"query": [
+								{
+									"key": "seasonType",
+									"value": "{{seasonType}}"
+								},
+								{
+									"key": "year",
+									"value": "{{year}}"
+								},
+								{
+									"key": "week",
+									"value": "{{week}}"
+								},
+								{
+									"key": "team",
+									"value": "{{team}}"
+								},
+								{
+									"key": "offense",
+									"value": "{{team}}"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
